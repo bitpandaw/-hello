@@ -1,0 +1,24 @@
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  font-family: 'Helvetica Neue', Arial, 'PingFang SC', sans-serif;
+  color: $text-main;
+  background: $bg-page;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+}
+
+.page {
+  min-height: 100%;
+  max-width: 14rem; /* 750 设计在 vw 下于 postcss 中转换; 大屏可后续 max-width:1200px */
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0.2rem 0.32rem 1rem;
+}
+
+.skeleton { min-height: 120px; }
+.img-lazy { min-height: 1px; }
+.ignore-vw { /* 不转 vw 的 class */ }

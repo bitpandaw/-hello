@@ -1,0 +1,31 @@
+# Maven
+**/target/
+!**/.gitkeep
+
+# Node / 前端
+**/node_modules/
+**/dist/
+**/.vite/
+
+# 本地环境（勿提交真密钥；示例文件可保留为 *.example）
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Cursor
+.cursor/

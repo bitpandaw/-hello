@@ -1,0 +1,15 @@
+# 本地依赖一键启动：docker compose up -d
+# 与 application-dev.yml 默认 127.0.0.1:3306/6379/5672 一致
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mall_dev
+    ports: ["3306:3306"]
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+  rabbit:
+    image: rabbitmq:3-management-alpine
+    ports: ["5672:5672", "15672:15672"]

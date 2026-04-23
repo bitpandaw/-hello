@@ -1,0 +1,17 @@
+@use 'sass:color';
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  color: $text-main;
+  font-family: 'Helvetica Neue', Arial, 'PingFang SC', sans-serif;
+}
+a {
+  color: $color-primary;
+  text-decoration: none;
+}
+.layout-container {
+  height: 100%;
+}
