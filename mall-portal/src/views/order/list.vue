@@ -9,7 +9,7 @@
     </el-select>
     <el-skeleton v-if="ld" :rows="4" />
     <el-card v-for="o in rows" :key="o.id" class="c" @click="$router.push('/order/detail/' + o.id)">
-      <div>{{ o.orderNo }} ￥{{ o.payAmount }} 状态 {{ o.status }}</div>
+      <div>{{ o.orderNo }} ￥{{ o.payAmount }} 状态 {{ statusText(o.status) }}</div>
     </el-card>
   </div>
 </template>
@@ -29,6 +29,17 @@ async function load() {
   const t = await myOrders(params)
   rows.value = t.data?.records || []
   ld.value = false
+}
+
+function statusText(st) {
+  const m = {
+    0: '待支付',
+    1: '待发货',
+    2: '待收货',
+    3: '已完成',
+    4: '已关闭',
+  }
+  return m[st] || ('状态' + st)
 }
 </script>
 <style scoped>

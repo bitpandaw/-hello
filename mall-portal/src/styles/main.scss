@@ -11,12 +11,19 @@ a {
   text-decoration: none;
 }
 
-.page {
+.ignore-vw .page {
   min-height: 100%;
-  max-width: 14rem; /* 750 设计在 vw 下于 postcss 中转换; 大屏可后续 max-width:1200px */
+  width: min(1200px, calc(100% - 32px));
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 0.2rem 0.32rem 1rem;
+  padding: 16px 0 20px;
+}
+
+@media (max-width: 860px) {
+  .ignore-vw .page {
+    width: calc(100% - 16px);
+    padding: 10px 0 14px;
+  }
 }
 
 .skeleton { min-height: 120px; }

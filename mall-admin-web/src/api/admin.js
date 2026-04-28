@@ -42,8 +42,29 @@ export function pageUms(p, s, username) {
 export function setUmsStatus(id, status) {
   return request.post('/admin/ums/members/' + id + '/status', { status })
 }
+export function listRoles() {
+  return request.get('/admin/acl/roles')
+}
+export function permissionTree() {
+  return request.get('/admin/acl/permissions/tree')
+}
+export function rolePermissionIds(roleId) {
+  return request.get('/admin/acl/roles/' + roleId + '/permissions')
+}
+export function saveRolePermissions(roleId, permissionIds) {
+  return request.post('/admin/acl/roles/' + roleId + '/permissions', { permissionIds })
+}
 export function uploadPms(file) {
   const fd = new FormData()
   fd.append('file', file)
   return request.post('/admin/pms/file', fd, { headers: { 'Content-Type': 'multipart/form-data' } })
+}
+export function recommendTrain() {
+  return request.post('/admin/recommend/train')
+}
+export function recommendModelStatus() {
+  return request.get('/admin/recommend/model/status')
+}
+export function recommendMetrics(days = 7) {
+  return request.get('/admin/recommend/metrics', { params: { days } })
 }

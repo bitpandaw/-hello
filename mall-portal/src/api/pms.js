@@ -21,3 +21,15 @@ export function commentList(params) {
 export function addComment(data) {
   return request.post('/api/pms/comment', data)
 }
+export function guessRecommend(params) {
+  return request.get('/api/pms/recommend/guess', { params })
+}
+export function similarRecommend(params) {
+  return request.get('/api/pms/recommend/similar', { params })
+}
+export function reportRecommendExpose(data) {
+  return request.post('/api/pms/recommend/expose', data)
+}
+export function reportRecommendClick(data) {
+  return request.post('/api/pms/recommend/click', data)
+}

@@ -25,4 +25,15 @@ public class SecurityUser {
         }
         return p.getId();
     }
+
+    public static Long optionalMember() {
+        var a = SecurityContextHolder.getContext().getAuthentication();
+        if (a == null || !a.isAuthenticated() || !(a.getPrincipal() instanceof MallPrincipal p)) {
+            return null;
+        }
+        if (!"M".equals(p.getKind())) {
+            return null;
+        }
+        return p.getId();
+    }
 }

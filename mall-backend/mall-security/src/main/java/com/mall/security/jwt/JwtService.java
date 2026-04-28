@@ -7,15 +7,12 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -30,8 +27,6 @@ public class JwtService {
     public static final String CL_JTI = "jti";
 
     private final JwtProperties props;
-    private final StringRedisTemplate stringRedisTemplate;
-
     private SecretKey key() {
         String s = props.getSecret();
         if (s.length() < 32) {
@@ -45,12 +40,7 @@ public class JwtService {
     }
 
     public String refreshToken(long id, String kind) {
-        String jti = UUID.randomUUID().toString();
-        long exp = props.getRefreshExpireMs();
-        String t = buildWithJti(id, kind, jti, exp);
-        String redisKey = refreshKey(kind, id, jti);
-        stringRedisTemplate.opsForValue().set(redisKey, "1", exp, TimeUnit.MILLISECONDS);
-        return t;
+        return build(id, kind, TYPE_REFRESH, props.getRefreshExpireMs());
     }
 
     public Map<String, String> pairForMember(long memberId) {
@@ -66,14 +56,8 @@ public class JwtService {
         if (!TYPE_REFRESH.equals(c.get(CLAIM_TYPE))) {
             throw new BusinessException(ResultCode.TOKEN_INVALID);
         }
-        String jti = c.getId() != null ? c.getId() : c.get(CL_JTI, String.class);
         long sub = Long.parseLong(c.getSubject());
         String kind = c.get(CLAIM_KIND, String.class);
-        String rkey = refreshKey(kind, sub, jti);
-        if (Boolean.FALSE.equals(stringRedisTemplate.hasKey(rkey))) {
-            throw new BusinessException(ResultCode.TOKEN_INVALID);
-        }
-        stringRedisTemplate.delete(rkey);
         if (KIND_MEMBER.equals(kind)) {
             return pairForMember(sub);
         }
@@ -81,14 +65,7 @@ public class JwtService {
     }
 
     public void logoutByRefreshToken(String refreshToken) {
-        Claims c = parse(refreshToken);
-        if (!TYPE_REFRESH.equals(c.get(CLAIM_TYPE))) {
-            return;
-        }
-        String jti = c.getId() != null ? c.getId() : c.get(CL_JTI, String.class);
-        long sub = Long.parseLong(c.getSubject());
-        String kind = c.get(CLAIM_KIND, String.class);
-        stringRedisTemplate.delete(refreshKey(kind, sub, jti));
+        // Stateless JWT mode (no Redis): logout handled on client side by deleting tokens.
     }
 
     public Claims parseAndValidateAccess(String token) {
@@ -99,30 +76,12 @@ public class JwtService {
         return c;
     }
 
-    private String refreshKey(String kind, long id, String jti) {
-        return "ref:" + kind + ":" + id + ":" + jti;
-    }
-
     private String build(long id, String kind, String typ, long expMs) {
         Date now = new Date();
         return Jwts.builder()
             .subject(String.valueOf(id))
             .claim(CLAIM_TYPE, typ)
             .claim(CLAIM_KIND, kind)
-            .issuedAt(now)
-            .expiration(new Date(now.getTime() + expMs))
-            .signWith(key())
-            .compact();
-    }
-
-    private String buildWithJti(long id, String kind, String jti, long expMs) {
-        Date now = new Date();
-        return Jwts.builder()
-            .subject(String.valueOf(id))
-            .id(jti)
-            .claim(CLAIM_TYPE, TYPE_REFRESH)
-            .claim(CLAIM_KIND, kind)
-            .claim(CL_JTI, jti)
             .issuedAt(now)
             .expiration(new Date(now.getTime() + expMs))
             .signWith(key())

@@ -25,7 +25,7 @@ public class SmsCouponController {
     }
 
     @PostMapping("/{id}/take")
-    @Operation(summary = "领券(限领+Redis防并发)")
+    @Operation(summary = "领券(限领+服务内并发控制)")
     public Result<?> take(@PathVariable("id") long id) {
         svc.take(SecurityUser.requireMember(), id);
         return Result.ok();

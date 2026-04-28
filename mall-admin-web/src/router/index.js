@@ -10,7 +10,14 @@ const routes = [
     name: 'Layout',
     component: () => import('@/layout/Index.vue'),
     meta: { requiresAuth: true },
-    children: [],
+    children: [
+      {
+        path: 'dashboard',
+        name: 'dashboard_static',
+        component: () => import('@/views/dashboard/index.vue'),
+        meta: { title: '控制台', keep: true },
+      },
+    ],
   },
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]

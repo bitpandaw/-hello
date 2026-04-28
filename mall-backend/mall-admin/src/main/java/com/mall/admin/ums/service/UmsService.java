@@ -10,7 +10,6 @@ import com.mall.mbg.mapper.UmsMemberMapper;
 import com.mall.security.jwt.JwtService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -18,7 +17,7 @@ import org.springframework.util.StringUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ConcurrentHashMap;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
@@ -27,18 +26,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class UmsService {
-    private static final String CAP = "captcha:";
+    private static final long CAPTCHA_TTL_MS = 2 * 60 * 1000L;
     private final UmsMemberMapper umsMemberMapper;
     private final UmsMemberAddressMapper umsMemberAddressMapper;
     private final PasswordEncoder passwordEncoder;
-    private final StringRedisTemplate redis;
     private final JwtService jwtService;
+    private static final Map<String, CaptchaEntry> CAPTCHA_CACHE = new ConcurrentHashMap<>();
+
+    @Data
+    private static class CaptchaEntry {
+        private final String code;
+        private final long expireAtMs;
+    }
 
     public Map<String, String> captcha() {
         LineCaptcha c = CaptchaUtil.createLineCaptcha(120, 40, 4, 4);
         String id = java.util.UUID.randomUUID().toString();
         String code = c.getCode();
-        redis.opsForValue().set(CAP + id, code.toLowerCase(), 2, TimeUnit.MINUTES);
+        CAPTCHA_CACHE.put(id, new CaptchaEntry(code.toLowerCase(), System.currentTimeMillis() + CAPTCHA_TTL_MS));
         Map<String, String> m = new HashMap<>();
         m.put("captchaKey", id);
         m.put("captchaImage", c.getImageBase64Data());
@@ -47,9 +52,16 @@ public class UmsService {
 
     @Transactional(rollbackFor = Exception.class)
     public void register(RegisterReq r) {
-        String stored = redis.opsForValue().get(CAP + r.getCaptchaKey());
-        redis.delete(CAP + r.getCaptchaKey());
-        if (!StringUtils.hasText(stored) || !stored.equalsIgnoreCase(r.getCode().trim().toLowerCase())) {
+        CaptchaEntry entry = CAPTCHA_CACHE.remove(r.getCaptchaKey());
+        if (entry == null || entry.getExpireAtMs() < System.currentTimeMillis()) {
+            throw new BusinessException(ResultCode.CAPTCHA_ERROR);
+        }
+        String stored = entry.getCode();
+        if (!StringUtils.hasText(stored)) {
+            throw new BusinessException(ResultCode.CAPTCHA_ERROR);
+        }
+        String inputCode = r.getCode() == null ? "" : r.getCode().trim().toLowerCase();
+        if (!stored.equalsIgnoreCase(inputCode)) {
             throw new BusinessException(ResultCode.CAPTCHA_ERROR);
         }
         if (umsMemberMapper.selectCount(new LambdaQueryWrapper<UmsMember>().eq(UmsMember::getUsername, r.getUsername())) > 0) {

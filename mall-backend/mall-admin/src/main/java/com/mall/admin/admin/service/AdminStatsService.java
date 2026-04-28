@@ -54,7 +54,7 @@ public class AdminStatsService {
         SecurityUser.requireAdmin();
         ChartVO c = new ChartVO();
         c.setGmvLast7Days(jdbc.query(
-            "SELECT DATE_FORMAT(create_time,'%Y-%m-%d') AS d, COALESCE(SUM(pay_amount),0) AS gmv FROM oms_order WHERE status>=1 AND create_time >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) AND deleted=0 GROUP BY DATE(create_time) ORDER BY d",
+            "SELECT DATE_FORMAT(create_time,'%Y-%m-%d') AS d, COALESCE(SUM(pay_amount),0) AS gmv FROM oms_order WHERE status>=1 AND create_time >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) AND deleted=0 GROUP BY DATE_FORMAT(create_time,'%Y-%m-%d') ORDER BY d",
             (rs, i) -> {
                 GmvPoint p = new GmvPoint();
                 p.setDay(rs.getString("d"));

@@ -4,11 +4,6 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-  data:
-    redis:
-      host: 127.0.0.1
-      port: 6379
-      database: 0
   rabbitmq:
     host: 127.0.0.1
     port: 5672
@@ -24,3 +19,12 @@ mybatis-plus:
       logic-delete-field: deleted
       logic-not-delete-value: 0
       logic-delete-value: 1
+
+recommend:
+  default-size: 8
+  cache-ttl-minutes: 120
+  sasrec:
+    enabled: true
+    base-url: http://127.0.0.1:8008
+    timeout-ms: 1200
+    max-retry: 1

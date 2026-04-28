@@ -8,19 +8,20 @@ import com.mall.mbg.mapper.SmsCouponMapper;
 import com.mall.common.api.ResultCode;
 import com.mall.common.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Service
 @RequiredArgsConstructor
 public class SmsCouponService {
     private final SmsCouponMapper smsCouponMapper;
     private final SmsCouponHistoryMapper smsCouponHistoryMapper;
-    private final StringRedisTemplate redis;
+    private static final Map<String, ReentrantLock> LOCKS = new ConcurrentHashMap<>();
 
     public List<SmsCoupon> list() {
         return smsCouponMapper.selectList(new LambdaQueryWrapper<SmsCoupon>().eq(SmsCoupon::getDeleted, 0));
@@ -33,8 +34,8 @@ public class SmsCouponService {
             throw new BusinessException(ResultCode.BUSINESS, "优惠券无效");
         }
         String k = "coupon:take:lock:" + memberId + ":" + couponId;
-        Boolean b = redis.opsForValue().setIfAbsent(k, "1", 3, TimeUnit.SECONDS);
-        if (Boolean.FALSE.equals(b)) {
+        ReentrantLock lock = LOCKS.computeIfAbsent(k, x -> new ReentrantLock());
+        if (!lock.tryLock()) {
             throw new BusinessException(ResultCode.BUSINESS, "请勿重复操作");
         }
         try {
@@ -50,7 +51,8 @@ public class SmsCouponService {
             h.setUseStatus(0);
             smsCouponHistoryMapper.insert(h);
         } finally {
-            redis.delete(k);
+            lock.unlock();
+            LOCKS.remove(k, lock);
         }
     }
 }
