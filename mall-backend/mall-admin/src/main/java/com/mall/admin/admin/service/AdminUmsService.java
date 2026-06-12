@@ -15,10 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class AdminUmsService {
     private final UmsMemberMapper umsMemberMapper;
 
-    public IPage<UmsMember> page(int p, int s, String username) {
+    public IPage<UmsMember> page(int p, int s, String username, String phone) {
         SecurityUser.requireAdmin();
         return umsMemberMapper.selectPage(new Page<>(p, s), new LambdaQueryWrapper<UmsMember>()
             .like(username != null && !username.isBlank(), UmsMember::getUsername, username)
+            .like(phone != null && !phone.isBlank(), UmsMember::getPhone, phone)
             .orderByDesc(UmsMember::getCreateTime));
     }
 

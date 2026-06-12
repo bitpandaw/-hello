@@ -29,3 +29,17 @@ yarn-debug.log*
 
 # Cursor
 .cursor/
+
+# 个人文档 / 论文相关（不入库）
+*.docx
+*.pdf
+~$*
+_docx_media/
+_pdf_pages/
+_personal_center_pdf_pages/
+_personal_center_pdf_text.txt
+
+# 上传的图片资源（体积大，不入库）
+mall-backend/mall-admin/mall-uploads/
+mall-portal/public/demo-images/
+mall-portal/public/real-products/

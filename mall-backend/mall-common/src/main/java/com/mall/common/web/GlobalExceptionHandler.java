@@ -12,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @Slf4j
 @RestControllerAdvice
@@ -46,10 +47,16 @@ public class GlobalExceptionHandler {
         return Result.error(ResultCode.FORBIDDEN.getCode(), e.getMessage());
     }
 
+    @ExceptionHandler(NoResourceFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Result<?> noResource(NoResourceFoundException e) {
+        return Result.error(404, "Not found");
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.OK)
     public Result<?> other(Exception e) {
         log.error("unhandled", e);
-        return Result.error(ResultCode.FAILED.getCode(), "系统繁忙");
+        return Result.error(ResultCode.FAILED.getCode(), "System busy");
     }
 }

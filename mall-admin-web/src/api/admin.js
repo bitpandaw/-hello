@@ -30,14 +30,14 @@ export function pageBrand(p, s) {
 export function saveBrand(b) {
   return request.post('/admin/pms/brands', b)
 }
-export function pageOms(p, s, status) {
-  return request.get('/admin/oms/orders', { params: { p, s, status } })
+export function pageOms(p, s, status, orderNo) {
+  return request.get('/admin/oms/orders', { params: { p, s, status, orderNo } })
 }
 export function shipOrder(id, d) {
   return request.post('/admin/oms/orders/' + id + '/ship', d)
 }
-export function pageUms(p, s, username) {
-  return request.get('/admin/ums/members', { params: { p, s, username } })
+export function pageUms(p, s, username, phone) {
+  return request.get('/admin/ums/members', { params: { p, s, username, phone } })
 }
 export function setUmsStatus(id, status) {
   return request.post('/admin/ums/members/' + id + '/status', { status })
@@ -58,13 +58,4 @@ export function uploadPms(file) {
   const fd = new FormData()
   fd.append('file', file)
   return request.post('/admin/pms/file', fd, { headers: { 'Content-Type': 'multipart/form-data' } })
-}
-export function recommendTrain() {
-  return request.post('/admin/recommend/train')
-}
-export function recommendModelStatus() {
-  return request.get('/admin/recommend/model/status')
-}
-export function recommendMetrics(days = 7) {
-  return request.get('/admin/recommend/metrics', { params: { days } })
 }

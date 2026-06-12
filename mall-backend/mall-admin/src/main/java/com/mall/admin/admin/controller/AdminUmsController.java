@@ -19,8 +19,12 @@ public class AdminUmsController {
 
     @GetMapping
     @Operation(summary = "C端用户列表")
-    public Result<IPage<UmsMember>> list(@RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "10") int s, @RequestParam(required = false) String username) {
-        return Result.ok(adminUmsService.page(p, s, username));
+    public Result<IPage<UmsMember>> list(
+        @RequestParam(defaultValue = "1") int p,
+        @RequestParam(defaultValue = "10") int s,
+        @RequestParam(required = false) String username,
+        @RequestParam(required = false) String phone) {
+        return Result.ok(adminUmsService.page(p, s, username, phone));
     }
 
     @PostMapping("/{id}/status")

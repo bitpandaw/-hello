@@ -1,0 +1,330 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1050" viewBox="0 0 1600 1050">
+  <defs>
+    <style>
+      .line{stroke:#222;stroke-width:1.4;fill:none}
+      .entity{fill:#fff;stroke:#222;stroke-width:1.6}
+      .relation{fill:#fff;stroke:#222;stroke-width:1.4}
+      .attr{fill:#fff;stroke:#222;stroke-width:1.2}
+      .txt{font-family:"SimSun","Microsoft YaHei",Arial,sans-serif;font-size:18px;fill:#111;text-anchor:middle;dominant-baseline:middle}
+      .small{font-size:15px}
+      .card{font-size:14px}
+    </style>
+  </defs>
+
+  <rect width="1600" height="1050" fill="#fff"/>
+
+  <!-- center entity: 商品 -->
+  <rect class="entity" x="720" y="462" width="96" height="54"/>
+  <text class="txt" x="768" y="489">商品</text>
+
+  <!-- 商品属性 -->
+  <line class="line" x1="768" y1="462" x2="704" y2="360"/>
+  <ellipse class="attr" cx="704" cy="360" rx="45" ry="22"/>
+  <text class="txt small" x="704" y="360">编号</text>
+  <line class="line" x1="786" y1="462" x2="812" y2="350"/>
+  <ellipse class="attr" cx="812" cy="350" rx="55" ry="22"/>
+  <text class="txt small" x="812" y="350">商品名称</text>
+  <line class="line" x1="816" y1="474" x2="930" y2="390"/>
+  <ellipse class="attr" cx="930" cy="390" rx="55" ry="22"/>
+  <text class="txt small" x="930" y="390">封面图</text>
+  <line class="line" x1="816" y1="489" x2="940" y2="489"/>
+  <ellipse class="attr" cx="1000" cy="489" rx="58" ry="22"/>
+  <text class="txt small" x="1000" y="489">最低价格</text>
+  <line class="line" x1="812" y1="514" x2="918" y2="605"/>
+  <ellipse class="attr" cx="960" cy="642" rx="58" ry="22"/>
+  <text class="txt small" x="960" y="642">上架状态</text>
+  <line class="line" x1="768" y1="516" x2="768" y2="650"/>
+  <ellipse class="attr" cx="768" cy="682" rx="58" ry="22"/>
+  <text class="txt small" x="768" y="682">审核状态</text>
+  <line class="line" x1="720" y1="501" x2="620" y2="600"/>
+  <ellipse class="attr" cx="585" cy="635" rx="58" ry="22"/>
+  <text class="txt small" x="585" y="635">商品详情</text>
+  <line class="line" x1="720" y1="480" x2="585" y2="445"/>
+  <ellipse class="attr" cx="525" cy="430" rx="58" ry="22"/>
+  <text class="txt small" x="525" y="430">副标题</text>
+
+  <!-- 分类 -->
+  <polygon class="relation" points="570,470 622,500 570,530 518,500"/>
+  <text class="txt small" x="570" y="500">属于</text>
+  <line class="line" x1="720" y1="489" x2="622" y2="500"/>
+  <text class="txt card" x="672" y="480">N</text>
+  <line class="line" x1="518" y1="500" x2="392" y2="500"/>
+  <text class="txt card" x="450" y="482">1</text>
+  <rect class="entity" x="292" y="473" width="100" height="54"/>
+  <text class="txt" x="342" y="500">商品分类</text>
+  <line class="line" x1="342" y1="473" x2="270" y2="400"/>
+  <ellipse class="attr" cx="235" cy="365" rx="45" ry="22"/>
+  <text class="txt small" x="235" y="365">编号</text>
+  <line class="line" x1="306" y1="473" x2="215" y2="510"/>
+  <ellipse class="attr" cx="160" cy="532" rx="45" ry="22"/>
+  <text class="txt small" x="160" y="532">名称</text>
+  <line class="line" x1="342" y1="527" x2="285" y2="610"/>
+  <ellipse class="attr" cx="252" cy="657" rx="50" ry="22"/>
+  <text class="txt small" x="252" y="657">层级</text>
+  <line class="line" x1="392" y1="500" x2="442" y2="570"/>
+  <ellipse class="attr" cx="475" cy="618" rx="55" ry="22"/>
+  <text class="txt small" x="475" y="618">父分类</text>
+
+  <!-- 品牌 -->
+  <polygon class="relation" points="895,292 945,322 895,352 845,322"/>
+  <text class="txt small" x="895" y="322">归属</text>
+  <line class="line" x1="793" y1="462" x2="845" y2="352"/>
+  <text class="txt card" x="816" y="404">N</text>
+  <line class="line" x1="945" y1="322" x2="1082" y2="322"/>
+  <text class="txt card" x="1010" y="302">1</text>
+  <rect class="entity" x="1082" y="295" width="90" height="54"/>
+  <text class="txt" x="1127" y="322">品牌</text>
+  <line class="line" x1="1127" y1="295" x2="1080" y2="235"/>
+  <ellipse class="attr" cx="1050" cy="195" rx="45" ry="22"/>
+  <text class="txt small" x="1050" y="195">编号</text>
+  <line class="line" x1="1172" y1="313" x2="1265" y2="280"/>
+  <ellipse class="attr" cx="1310" cy="265" rx="45" ry="22"/>
+  <text class="txt small" x="1310" y="265">名称</text>
+  <line class="line" x1="1156" y1="349" x2="1230" y2="410"/>
+  <ellipse class="attr" cx="1272" cy="445" rx="48" ry="22"/>
+  <text class="txt small" x="1272" y="445">Logo</text>
+
+  <!-- SKU -->
+  <polygon class="relation" points="1040,585 1090,615 1040,645 990,615"/>
+  <text class="txt small" x="1040" y="615">拥有</text>
+  <line class="line" x1="816" y1="505" x2="990" y2="615"/>
+  <text class="txt card" x="898" y="548">1</text>
+  <line class="line" x1="1090" y1="615" x2="1218" y2="615"/>
+  <text class="txt card" x="1155" y="595">N</text>
+  <rect class="entity" x="1218" y="588" width="90" height="54"/>
+  <text class="txt" x="1263" y="615">SKU</text>
+  <line class="line" x1="1263" y1="588" x2="1222" y2="530"/>
+  <ellipse class="attr" cx="1192" cy="488" rx="45" ry="22"/>
+  <text class="txt small" x="1192" y="488">编号</text>
+  <line class="line" x1="1308" y1="605" x2="1392" y2="565"/>
+  <ellipse class="attr" cx="1438" cy="543" rx="54" ry="22"/>
+  <text class="txt small" x="1438" y="543">SKU编码</text>
+  <line class="line" x1="1308" y1="625" x2="1395" y2="662"/>
+  <ellipse class="attr" cx="1442" cy="682" rx="45" ry="22"/>
+  <text class="txt small" x="1442" y="682">价格</text>
+  <line class="line" x1="1263" y1="642" x2="1263" y2="730"/>
+  <ellipse class="attr" cx="1263" cy="760" rx="55" ry="22"/>
+  <text class="txt small" x="1263" y="760">规格JSON</text>
+
+  <!-- 库存 -->
+  <polygon class="relation" points="1345,795 1395,825 1345,855 1295,825"/>
+  <text class="txt small" x="1345" y="825">对应</text>
+  <line class="line" x1="1288" y1="642" x2="1328" y2="795"/>
+  <text class="txt card" x="1300" y="716">1</text>
+  <line class="line" x1="1395" y1="825" x2="1480" y2="825"/>
+  <text class="txt card" x="1435" y="805">1</text>
+  <rect class="entity" x="1480" y="798" width="88" height="54"/>
+  <text class="txt" x="1524" y="825">库存</text>
+  <line class="line" x1="1524" y1="798" x2="1488" y2="742"/>
+  <ellipse class="attr" cx="1462" cy="702" rx="45" ry="22"/>
+  <text class="txt small" x="1462" y="702">编号</text>
+  <line class="line" x1="1480" y1="837" x2="1410" y2="895"/>
+  <ellipse class="attr" cx="1375" cy="924" rx="45" ry="22"/>
+  <text class="txt small" x="1375" y="924">库存量</text>
+  <line class="line" x1="1568" y1="812" x2="1588" y2="790"/>
+  <ellipse class="attr" cx="1538" cy="742" rx="50" ry="22"/>
+  <text class="txt small" x="1538" y="742">预警值</text>
+
+  <!-- 用户 -->
+  <rect class="entity" x="705" y="115" width="92" height="54"/>
+  <text class="txt" x="751" y="142">用户</text>
+  <line class="line" x1="751" y1="169" x2="751" y2="244"/>
+  <polygon class="relation" points="751,244 803,274 751,304 699,274"/>
+  <text class="txt small" x="751" y="274">下单</text>
+  <line class="line" x1="751" y1="304" x2="751" y2="462"/>
+  <text class="txt card" x="731" y="204">1</text>
+  <text class="txt card" x="731" y="390">N</text>
+  <line class="line" x1="705" y1="126" x2="620" y2="78"/>
+  <ellipse class="attr" cx="574" cy="52" rx="45" ry="22"/>
+  <text class="txt small" x="574" y="52">编号</text>
+  <line class="line" x1="728" y1="115" x2="685" y2="47"/>
+  <ellipse class="attr" cx="660" cy="20" rx="50" ry="20"/>
+  <text class="txt small" x="660" y="20">用户名</text>
+  <line class="line" x1="776" y1="115" x2="824" y2="48"/>
+  <ellipse class="attr" cx="850" cy="20" rx="45" ry="20"/>
+  <text class="txt small" x="850" y="20">手机</text>
+  <line class="line" x1="797" y1="137" x2="902" y2="100"/>
+  <ellipse class="attr" cx="948" cy="84" rx="45" ry="22"/>
+  <text class="txt small" x="948" y="84">邮箱</text>
+  <line class="line" x1="705" y1="158" x2="612" y2="198"/>
+  <ellipse class="attr" cx="566" cy="218" rx="45" ry="22"/>
+  <text class="txt small" x="566" y="218">状态</text>
+
+  <!-- 地址 -->
+  <polygon class="relation" points="458,142 508,172 458,202 408,172"/>
+  <text class="txt small" x="458" y="172">拥有</text>
+  <line class="line" x1="705" y1="142" x2="508" y2="172"/>
+  <text class="txt card" x="608" y="146">1</text>
+  <line class="line" x1="408" y1="172" x2="290" y2="172"/>
+  <text class="txt card" x="350" y="153">N</text>
+  <rect class="entity" x="188" y="145" width="102" height="54"/>
+  <text class="txt" x="239" y="172">收货地址</text>
+  <line class="line" x1="188" y1="158" x2="112" y2="118"/>
+  <ellipse class="attr" cx="68" cy="96" rx="45" ry="22"/>
+  <text class="txt small" x="68" y="96">编号</text>
+  <line class="line" x1="188" y1="187" x2="118" y2="236"/>
+  <ellipse class="attr" cx="76" cy="266" rx="50" ry="22"/>
+  <text class="txt small" x="76" y="266">收件人</text>
+  <line class="line" x1="290" y1="160" x2="356" y2="112"/>
+  <ellipse class="attr" cx="392" cy="86" rx="45" ry="22"/>
+  <text class="txt small" x="392" y="86">电话</text>
+  <line class="line" x1="239" y1="199" x2="240" y2="285"/>
+  <ellipse class="attr" cx="240" cy="318" rx="55" ry="22"/>
+  <text class="txt small" x="240" y="318">详细地址</text>
+
+  <!-- 订单 -->
+  <rect class="entity" x="705" y="835" width="92" height="54"/>
+  <text class="txt" x="751" y="862">订单</text>
+  <line class="line" x1="751" y1="516" x2="751" y2="835"/>
+  <polygon class="relation" points="751,718 803,748 751,778 699,748"/>
+  <text class="txt small" x="751" y="748">生成</text>
+  <text class="txt card" x="731" y="610">N</text>
+  <text class="txt card" x="731" y="812">1</text>
+  <line class="line" x1="705" y1="850" x2="616" y2="815"/>
+  <ellipse class="attr" cx="570" cy="797" rx="48" ry="22"/>
+  <text class="txt small" x="570" y="797">订单号</text>
+  <line class="line" x1="705" y1="875" x2="625" y2="930"/>
+  <ellipse class="attr" cx="584" cy="958" rx="55" ry="22"/>
+  <text class="txt small" x="584" y="958">支付金额</text>
+  <line class="line" x1="797" y1="846" x2="894" y2="800"/>
+  <ellipse class="attr" cx="940" cy="778" rx="45" ry="22"/>
+  <text class="txt small" x="940" y="778">状态</text>
+  <line class="line" x1="797" y1="875" x2="902" y2="930"/>
+  <ellipse class="attr" cx="948" cy="954" rx="55" ry="22"/>
+  <text class="txt small" x="948" y="954">收货信息</text>
+  <line class="line" x1="751" y1="889" x2="751" y2="992"/>
+  <ellipse class="attr" cx="751" cy="1020" rx="55" ry="22"/>
+  <text class="txt small" x="751" y="1020">创建时间</text>
+
+  <!-- 订单明细 -->
+  <polygon class="relation" points="1040,862 1090,892 1040,922 990,892"/>
+  <text class="txt small" x="1040" y="892">包含</text>
+  <line class="line" x1="797" y1="862" x2="990" y2="892"/>
+  <text class="txt card" x="895" y="856">1</text>
+  <line class="line" x1="1090" y1="892" x2="1218" y2="892"/>
+  <text class="txt card" x="1153" y="872">N</text>
+  <rect class="entity" x="1218" y="865" width="100" height="54"/>
+  <text class="txt" x="1268" y="892">订单明细</text>
+  <line class="line" x1="1268" y1="865" x2="1232" y2="804"/>
+  <ellipse class="attr" cx="1205" cy="760" rx="45" ry="22"/>
+  <text class="txt small" x="1205" y="760">编号</text>
+  <line class="line" x1="1318" y1="880" x2="1415" y2="850"/>
+  <ellipse class="attr" cx="1460" cy="836" rx="45" ry="22"/>
+  <text class="txt small" x="1460" y="836">数量</text>
+  <line class="line" x1="1318" y1="905" x2="1410" y2="945"/>
+  <ellipse class="attr" cx="1455" cy="965" rx="55" ry="22"/>
+  <text class="txt small" x="1455" y="965">商品快照</text>
+
+  <!-- 购物车 -->
+  <polygon class="relation" points="505,780 555,810 505,840 455,810"/>
+  <text class="txt small" x="505" y="810">加入</text>
+  <line class="line" x1="720" y1="516" x2="555" y2="810"/>
+  <text class="txt card" x="640" y="650">N</text>
+  <line class="line" x1="458" y1="202" x2="455" y2="810"/>
+  <text class="txt card" x="440" y="500">1</text>
+  <rect class="entity" x="270" y="783" width="96" height="54"/>
+  <text class="txt" x="318" y="810">购物车</text>
+  <line class="line" x1="366" y1="810" x2="455" y2="810"/>
+  <line class="line" x1="318" y1="783" x2="278" y2="720"/>
+  <ellipse class="attr" cx="250" cy="676" rx="45" ry="22"/>
+  <text class="txt small" x="250" y="676">编号</text>
+  <line class="line" x1="270" y1="826" x2="175" y2="875"/>
+  <ellipse class="attr" cx="130" cy="898" rx="45" ry="22"/>
+  <text class="txt small" x="130" y="898">数量</text>
+  <line class="line" x1="366" y1="832" x2="430" y2="900"/>
+  <ellipse class="attr" cx="462" cy="934" rx="55" ry="22"/>
+  <text class="txt small" x="462" y="934">加入时间</text>
+
+  <!-- 优惠券 -->
+  <rect class="entity" x="1090" y="115" width="96" height="54"/>
+  <text class="txt" x="1138" y="142">优惠券</text>
+  <polygon class="relation" points="985,142 1035,172 985,202 935,172"/>
+  <text class="txt small" x="985" y="172">领取</text>
+  <line class="line" x1="797" y1="142" x2="935" y2="172"/>
+  <text class="txt card" x="870" y="138">1</text>
+  <line class="line" x1="1035" y1="172" x2="1090" y2="142"/>
+  <text class="txt card" x="1062" y="140">N</text>
+  <line class="line" x1="1138" y1="169" x2="980" y2="835"/>
+  <polygon class="relation" points="1015,700 1065,730 1015,760 965,730"/>
+  <text class="txt small" x="1015" y="730">抵扣</text>
+  <line class="line" x1="965" y1="730" x2="797" y2="850"/>
+  <text class="txt card" x="900" y="758">0..1</text>
+  <line class="line" x1="1138" y1="115" x2="1108" y2="62"/>
+  <ellipse class="attr" cx="1086" cy="24" rx="45" ry="20"/>
+  <text class="txt small" x="1086" y="24">编号</text>
+  <line class="line" x1="1186" y1="130" x2="1285" y2="98"/>
+  <ellipse class="attr" cx="1332" cy="83" rx="45" ry="22"/>
+  <text class="txt small" x="1332" y="83">名称</text>
+  <line class="line" x1="1186" y1="154" x2="1286" y2="190"/>
+  <ellipse class="attr" cx="1334" cy="207" rx="50" ry="22"/>
+  <text class="txt small" x="1334" y="207">有效期</text>
+  <line class="line" x1="1090" y1="160" x2="1012" y2="220"/>
+  <ellipse class="attr" cx="970" cy="252" rx="55" ry="22"/>
+  <text class="txt small" x="970" y="252">使用门槛</text>
+
+  <!-- 评价 -->
+  <polygon class="relation" points="500,312 552,342 500,372 448,342"/>
+  <text class="txt small" x="500" y="342">评价</text>
+  <line class="line" x1="705" y1="154" x2="552" y2="342"/>
+  <text class="txt card" x="620" y="240">1</text>
+  <line class="line" x1="720" y1="474" x2="552" y2="342"/>
+  <text class="txt card" x="640" y="382">N</text>
+  <rect class="entity" x="300" y="315" width="92" height="54"/>
+  <text class="txt" x="346" y="342">评价</text>
+  <line class="line" x1="392" y1="342" x2="448" y2="342"/>
+  <line class="line" x1="346" y1="315" x2="302" y2="260"/>
+  <ellipse class="attr" cx="270" cy="220" rx="45" ry="22"/>
+  <text class="txt small" x="270" y="220">编号</text>
+  <line class="line" x1="300" y1="354" x2="205" y2="390"/>
+  <ellipse class="attr" cx="160" cy="407" rx="45" ry="22"/>
+  <text class="txt small" x="160" y="407">评分</text>
+  <line class="line" x1="392" y1="354" x2="458" y2="405"/>
+  <ellipse class="attr" cx="495" cy="434" rx="45" ry="22"/>
+  <text class="txt small" x="495" y="434">内容</text>
+
+  <!-- 权限管理 -->
+  <rect class="entity" x="1265" y="115" width="92" height="54"/>
+  <text class="txt" x="1311" y="142">角色</text>
+  <rect class="entity" x="1452" y="115" width="92" height="54"/>
+  <text class="txt" x="1498" y="142">权限</text>
+  <polygon class="relation" points="1216,42 1266,72 1216,102 1166,72"/>
+  <text class="txt small" x="1216" y="72">授予</text>
+  <line class="line" x1="797" y1="126" x2="1166" y2="72"/>
+  <line class="line" x1="1266" y1="72" x2="1311" y2="115"/>
+  <text class="txt card" x="1010" y="78">N</text>
+  <text class="txt card" x="1290" y="95">N</text>
+  <polygon class="relation" points="1405,142 1452,172 1405,202 1358,172"/>
+  <text class="txt small" x="1405" y="172">配置</text>
+  <line class="line" x1="1357" y1="142" x2="1358" y2="172"/>
+  <line class="line" x1="1452" y1="142" x2="1452" y2="172"/>
+  <text class="txt card" x="1382" y="126">N</text>
+  <text class="txt card" x="1432" y="126">N</text>
+  <line class="line" x1="1498" y1="115" x2="1465" y2="65"/>
+  <ellipse class="attr" cx="1440" cy="28" rx="45" ry="20"/>
+  <text class="txt small" x="1440" y="28">编号</text>
+  <line class="line" x1="1544" y1="142" x2="1588" y2="142"/>
+  <ellipse class="attr" cx="1550" cy="195" rx="45" ry="22"/>
+  <text class="txt small" x="1550" y="195">编码</text>
+  <line class="line" x1="1311" y1="115" x2="1310" y2="48"/>
+  <ellipse class="attr" cx="1310" cy="24" rx="45" ry="20"/>
+  <text class="txt small" x="1310" y="24">名称</text>
+
+  <!-- 支付流水 -->
+  <polygon class="relation" points="570,940 620,970 570,1000 520,970"/>
+  <text class="txt small" x="570" y="970">支付</text>
+  <line class="line" x1="705" y1="880" x2="620" y2="970"/>
+  <text class="txt card" x="660" y="910">1</text>
+  <line class="line" x1="520" y1="970" x2="405" y2="970"/>
+  <text class="txt card" x="462" y="950">1</text>
+  <rect class="entity" x="300" y="943" width="105" height="54"/>
+  <text class="txt" x="352" y="970">支付流水</text>
+  <line class="line" x1="300" y1="955" x2="212" y2="925"/>
+  <ellipse class="attr" cx="168" cy="910" rx="45" ry="22"/>
+  <text class="txt small" x="168" y="910">编号</text>
+  <line class="line" x1="352" y1="943" x2="346" y2="888"/>
+  <ellipse class="attr" cx="342" cy="858" rx="55" ry="22"/>
+  <text class="txt small" x="342" y="858">交易单号</text>
+  <line class="line" x1="405" y1="982" x2="470" y2="1018"/>
+  <ellipse class="attr" cx="505" cy="1038" rx="55" ry="20"/>
+  <text class="txt small" x="505" y="1038">支付状态</text>
+</svg>

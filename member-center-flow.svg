@@ -1,0 +1,148 @@
+<svg width="1200" height="1650" viewBox="0 0 1200 1650" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,8 L11,4 z" fill="#2d5f91"/>
+    </marker>
+    <style>
+      .title { font: 700 30px "Microsoft YaHei", sans-serif; fill: #1e2d3d; }
+      .subtitle { font: 16px "Microsoft YaHei", sans-serif; fill: #5f7388; }
+      .text { font: 17px "Microsoft YaHei", sans-serif; fill: #1f2d3d; }
+      .small { font: 14px "Microsoft YaHei", sans-serif; fill: #1f2d3d; }
+      .box { fill: #eef5fb; stroke: #2d5f91; stroke-width: 2.2; rx: 14; ry: 14; }
+      .service { fill: #f6f9ff; stroke: #658ab2; stroke-width: 2.2; rx: 14; ry: 14; }
+      .decision { fill: #fff7e8; stroke: #c88a17; stroke-width: 2.2; }
+      .success { fill: #e9f7ea; stroke: #3f8f4d; stroke-width: 2.2; rx: 18; ry: 18; }
+      .danger { fill: #fdeceb; stroke: #c44444; stroke-width: 2.2; rx: 18; ry: 18; }
+      .line { stroke: #2d5f91; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+      .lane { stroke: #d8e3ef; stroke-width: 1.5; stroke-dasharray: 8 6; }
+      .lane-title { font: 700 18px "Microsoft YaHei", sans-serif; fill: #2d5f91; }
+    </style>
+  </defs>
+
+  <text x="430" y="42" class="title">个人中心与收货地址管理流程图</text>
+  <text x="298" y="72" class="subtitle">对应个人中心页面、地址管理页面，以及 getMe() / listAddress() / saveAddress() 的真实实现链路</text>
+
+  <line x1="390" y1="105" x2="390" y2="1570" class="lane"/>
+  <line x1="805" y1="105" x2="805" y2="1570" class="lane"/>
+  <text x="174" y="122" class="lane-title">前端 / 用户操作</text>
+  <text x="512" y="122" class="lane-title">后端控制层与服务层</text>
+  <text x="930" y="122" class="lane-title">数据库 / 业务结果</text>
+
+  <rect x="92" y="150" width="230" height="64" class="box"/>
+  <text x="132" y="190" class="text">用户登录后进入个人中心</text>
+
+  <line x1="207" y1="214" x2="207" y2="250" class="line"/>
+
+  <rect x="68" y="250" width="278" height="76" class="box"/>
+  <text x="103" y="290" class="text">页面加载并发起当前用户信息请求</text>
+  <text x="118" y="313" class="small">getMe() → GET /api/ums/me</text>
+
+  <line x1="346" y1="288" x2="450" y2="288" class="line"/>
+
+  <rect x="450" y="250" width="300" height="76" class="service"/>
+  <text x="503" y="290" class="text">UmsController.me()</text>
+  <text x="482" y="313" class="small">调用 UmsService.profile()</text>
+
+  <line x1="600" y1="326" x2="600" y2="364" class="line"/>
+
+  <rect x="450" y="364" width="300" height="82" class="service"/>
+  <text x="486" y="402" class="text">根据当前登录用户编号查询</text>
+  <text x="487" y="426" class="text">会员基础信息</text>
+
+  <line x1="750" y1="405" x2="920" y2="405" class="line"/>
+
+  <rect x="920" y="370" width="220" height="70" class="box"/>
+  <text x="957" y="412" class="text">返回用户名、手机号、</text>
+  <text x="995" y="434" class="small">邮箱、头像等数据</text>
+
+  <line x1="920" y1="500" x2="750" y2="500" class="line"/>
+  <line x1="450" y1="500" x2="346" y2="500" class="line"/>
+
+  <rect x="68" y="462" width="278" height="76" class="box"/>
+  <text x="111" y="502" class="text">个人中心页面展示账户信息</text>
+  <text x="92" y="525" class="small">并提供资料、地址、优惠权益、订单中心入口</text>
+
+  <line x1="207" y1="538" x2="207" y2="574" class="line"/>
+
+  <rect x="74" y="574" width="266" height="64" class="box"/>
+  <text x="114" y="614" class="text">用户进入收货地址页面</text>
+
+  <line x1="207" y1="638" x2="207" y2="674" class="line"/>
+
+  <rect x="58" y="674" width="298" height="76" class="box"/>
+  <text x="95" y="714" class="text">页面加载并请求地址列表</text>
+  <text x="107" y="737" class="small">listAddress() → GET /api/ums/address</text>
+
+  <line x1="356" y1="712" x2="450" y2="712" class="line"/>
+
+  <rect x="450" y="674" width="300" height="76" class="service"/>
+  <text x="489" y="714" class="text">UmsController.addrList()</text>
+  <text x="469" y="737" class="small">调用 UmsService.addressList()</text>
+
+  <line x1="600" y1="750" x2="600" y2="788" class="line"/>
+
+  <rect x="450" y="788" width="300" height="82" class="service"/>
+  <text x="485" y="826" class="text">根据当前用户编号查询</text>
+  <text x="500" y="850" class="text">收货地址列表</text>
+
+  <line x1="750" y1="829" x2="920" y2="829" class="line"/>
+
+  <rect x="920" y="794" width="220" height="70" class="box"/>
+  <text x="970" y="836" class="text">返回地址列表</text>
+
+  <line x1="920" y1="924" x2="750" y2="924" class="line"/>
+  <line x1="450" y1="924" x2="356" y2="924" class="line"/>
+
+  <rect x="58" y="886" width="298" height="76" class="box"/>
+  <text x="97" y="926" class="text">地址页面展示已有地址信息</text>
+  <text x="107" y="949" class="small">并提供新增 / 修改地址表单</text>
+
+  <line x1="207" y1="962" x2="207" y2="998" class="line"/>
+
+  <rect x="46" y="998" width="322" height="76" class="box"/>
+  <text x="83" y="1038" class="text">填写地址表单并点击保存</text>
+  <text x="84" y="1061" class="small">saveAddress() → POST /api/ums/address</text>
+
+  <line x1="368" y1="1036" x2="450" y2="1036" class="line"/>
+
+  <rect x="450" y="998" width="300" height="76" class="service"/>
+  <text x="502" y="1038" class="text">UmsController.addr()</text>
+  <text x="470" y="1061" class="small">调用 UmsService.addressSave()</text>
+
+  <line x1="600" y1="1074" x2="600" y2="1112" class="line"/>
+
+  <polygon points="600,1112 748,1176 600,1240 452,1176" class="decision"/>
+  <text x="542" y="1168" class="text">地址是否已有编号</text>
+  <text x="576" y="1192" class="small">id</text>
+
+  <line x1="748" y1="1176" x2="920" y2="1176" class="line"/>
+  <text x="815" y="1164" class="small">是</text>
+
+  <rect x="920" y="1142" width="220" height="70" class="service"/>
+  <text x="970" y="1184" class="text">更新原有地址记录</text>
+
+  <line x1="600" y1="1240" x2="600" y2="1278" class="line"/>
+  <text x="615" y="1262" class="small">否</text>
+
+  <rect x="488" y="1278" width="224" height="70" class="service"/>
+  <text x="542" y="1320" class="text">插入新的地址记录</text>
+
+  <path d="M920 1176 L1080 1176 L1080 1388 L712 1388" class="line"/>
+  <line x1="600" y1="1348" x2="600" y2="1388" class="line"/>
+
+  <rect x="450" y="1388" width="300" height="82" class="service"/>
+  <text x="489" y="1426" class="text">地址保存成功后，前端再次</text>
+  <text x="500" y="1450" class="text">请求最新地址列表</text>
+
+  <line x1="750" y1="1429" x2="920" y2="1429" class="line"/>
+
+  <rect x="920" y="1394" width="220" height="70" class="success"/>
+  <text x="974" y="1436" class="text">地址保存成功</text>
+
+  <line x1="920" y1="1520" x2="750" y2="1520" class="line"/>
+  <line x1="450" y1="1520" x2="368" y2="1520" class="line"/>
+
+  <rect x="52" y="1482" width="316" height="76" class="success"/>
+  <text x="92" y="1522" class="text">页面刷新地址列表并完成个人中心</text>
+  <text x="148" y="1545" class="small">地址管理流程</text>
+</svg>

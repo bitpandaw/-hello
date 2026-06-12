@@ -19,12 +19,3 @@ mybatis-plus:
       logic-delete-field: deleted
       logic-not-delete-value: 0
       logic-delete-value: 1
-
-recommend:
-  default-size: 8
-  cache-ttl-minutes: 120
-  sasrec:
-    enabled: true
-    base-url: http://127.0.0.1:8008
-    timeout-ms: 1200
-    max-retry: 1

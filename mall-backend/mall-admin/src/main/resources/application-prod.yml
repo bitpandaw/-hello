@@ -9,12 +9,3 @@ spring:
     port: ${RABBIT_PORT:5672}
     username: ${RABBIT_USER:guest}
     password: ${RABBIT_PWD:guest}
-
-recommend:
-  default-size: ${RECOMMEND_DEFAULT_SIZE:8}
-  cache-ttl-minutes: ${RECOMMEND_CACHE_TTL_MINUTES:120}
-  sasrec:
-    enabled: ${RECOMMEND_SASREC_ENABLED:true}
-    base-url: ${RECOMMEND_SASREC_BASE_URL:http://127.0.0.1:8008}
-    timeout-ms: ${RECOMMEND_SASREC_TIMEOUT_MS:1200}
-    max-retry: ${RECOMMEND_SASREC_MAX_RETRY:1}

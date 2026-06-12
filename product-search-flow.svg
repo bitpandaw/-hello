@@ -1,0 +1,74 @@
+<svg width="980" height="1020" viewBox="0 0 980 1020" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2f5d8a"/>
+    </marker>
+    <style>
+      .title { font: bold 24px "Microsoft YaHei", sans-serif; fill: #1f2d3d; }
+      .text { font: 16px "Microsoft YaHei", sans-serif; fill: #1f2d3d; }
+      .small { font: 14px "Microsoft YaHei", sans-serif; fill: #1f2d3d; }
+      .box { fill: #eef5fb; stroke: #2f5d8a; stroke-width: 2; rx: 12; ry: 12; }
+      .decision { fill: #fff7e6; stroke: #c58b00; stroke-width: 2; }
+      .end { fill: #e8f7e8; stroke: #3c8d40; stroke-width: 2; rx: 18; ry: 18; }
+      .fail { fill: #fdecec; stroke: #c23b3b; stroke-width: 2; rx: 18; ry: 18; }
+      .line { stroke: #2f5d8a; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <text x="345" y="40" class="title">商品浏览与搜索流程图</text>
+
+  <rect x="390" y="70" width="200" height="55" class="box"/>
+  <text x="427" y="105" class="text">进入商品页面</text>
+
+  <line x1="490" y1="125" x2="490" y2="160" class="line"/>
+
+  <rect x="350" y="160" width="280" height="55" class="box"/>
+  <text x="378" y="195" class="text">系统加载商品列表信息</text>
+
+  <line x1="490" y1="215" x2="490" y2="250" class="line"/>
+
+  <rect x="320" y="250" width="340" height="55" class="box"/>
+  <text x="336" y="285" class="text">输入关键字或选择分类、排序条件</text>
+
+  <line x1="490" y1="305" x2="490" y2="340" class="line"/>
+
+  <rect x="350" y="340" width="280" height="55" class="box"/>
+  <text x="380" y="375" class="text">前端发送商品查询请求</text>
+
+  <line x1="490" y1="395" x2="490" y2="430" class="line"/>
+
+  <rect x="320" y="430" width="340" height="55" class="box"/>
+  <text x="338" y="465" class="text">后端接收请求并构造查询条件</text>
+
+  <line x1="490" y1="485" x2="490" y2="520" class="line"/>
+
+  <rect x="350" y="520" width="280" height="55" class="box"/>
+  <text x="392" y="555" class="text">查询数据库商品信息</text>
+
+  <line x1="490" y1="575" x2="490" y2="610" class="line"/>
+
+  <polygon points="490,610 620,665 490,720 360,665" class="decision"/>
+  <text x="410" y="660" class="text">是否查询到</text>
+  <text x="426" y="685" class="text">匹配商品</text>
+
+  <line x1="620" y1="665" x2="800" y2="665" class="line"/>
+  <text x="690" y="655" class="small">否</text>
+  <rect x="800" y="635" width="140" height="60" class="fail"/>
+  <text x="822" y="672" class="text">显示空结果</text>
+
+  <line x1="490" y1="720" x2="490" y2="755" class="line"/>
+  <text x="505" y="740" class="small">是</text>
+
+  <rect x="350" y="755" width="280" height="55" class="box"/>
+  <text x="378" y="790" class="text">返回匹配的商品数据信息</text>
+
+  <line x1="490" y1="810" x2="490" y2="845" class="line"/>
+
+  <rect x="350" y="845" width="280" height="55" class="box"/>
+  <text x="395" y="880" class="text">前端展示商品搜索结果</text>
+
+  <line x1="490" y1="900" x2="490" y2="935" class="line"/>
+
+  <rect x="390" y="935" width="200" height="55" class="end"/>
+  <text x="420" y="970" class="text">完成商品浏览</text>
+</svg>

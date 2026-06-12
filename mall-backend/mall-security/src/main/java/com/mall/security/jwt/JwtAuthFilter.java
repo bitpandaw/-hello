@@ -31,7 +31,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
         String path = request.getRequestURI();
-        if (isPublic(path) || pmsGetPublic(request, path) || (path != null && path.startsWith("/uploads/"))) {
+        if (isPublic(path) || pmsPublic(request, path) || (path != null && path.startsWith("/uploads/"))) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -68,8 +68,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private static boolean pmsGetPublic(HttpServletRequest request, String path) {
-        return "GET".equalsIgnoreCase(request.getMethod()) && path.startsWith("/api/pms/");
+    private static boolean pmsPublic(HttpServletRequest request, String path) {
+        if (path == null || !path.startsWith("/api/pms/")) {
+            return false;
+        }
+        return "GET".equalsIgnoreCase(request.getMethod());
     }
 
     private static boolean isPublic(String path) {

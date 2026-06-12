@@ -1,0 +1,113 @@
+<svg width="1100" height="1880" viewBox="0 0 1100 1880" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#000000"/>
+    </marker>
+    <style>
+      .title { font: bold 28px "Microsoft YaHei", sans-serif; fill: #000000; }
+      .box { fill: #ffffff; stroke: #000000; stroke-width: 2; rx: 10; ry: 10; }
+      .decision { fill: #ffffff; stroke: #000000; stroke-width: 2; }
+      .end { fill: #ffffff; stroke: #000000; stroke-width: 2; rx: 18; ry: 18; }
+      .text { font: 16px "Microsoft YaHei", sans-serif; fill: #000000; }
+      .small { font: 14px "Microsoft YaHei", sans-serif; fill: #000000; }
+      .line { stroke: #000000; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect x="10" y="10" width="1080" height="1860" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="400" y="46" class="title">用户管理流程图</text>
+
+  <rect x="390" y="90" width="320" height="56" class="box"/>
+  <text x="438" y="125" class="text">管理员进入用户管理页面</text>
+
+  <line x1="550" y1="146" x2="550" y2="188" class="line"/>
+
+  <rect x="320" y="188" width="460" height="68" class="box"/>
+  <text x="382" y="223" class="text">系统分页展示会员列表</text>
+  <text x="336" y="246" class="small">前端调用 pageUms()，后台返回 ums_member 分页数据</text>
+
+  <line x1="550" y1="256" x2="550" y2="300" class="line"/>
+
+  <rect x="310" y="300" width="480" height="68" class="box"/>
+  <text x="346" y="335" class="text">管理员输入用户名或手机号后单击查询</text>
+  <text x="389" y="358" class="small">前端提交筛选条件</text>
+
+  <line x1="550" y1="368" x2="550" y2="412" class="line"/>
+
+  <rect x="300" y="412" width="500" height="68" class="box"/>
+  <text x="355" y="447" class="text">后台校验管理员身份并按条件分页查询</text>
+  <text x="336" y="470" class="small">AdminUmsController.list() → AdminUmsService.page()</text>
+
+  <line x1="550" y1="480" x2="550" y2="524" class="line"/>
+
+  <rect x="360" y="524" width="380" height="56" class="box"/>
+  <text x="407" y="559" class="text">前端展示筛选后的会员数据</text>
+
+  <line x1="550" y1="580" x2="550" y2="628" class="line"/>
+
+  <rect x="360" y="628" width="380" height="56" class="box"/>
+  <text x="422" y="663" class="text">管理员单击“封禁”或“解封”</text>
+
+  <line x1="550" y1="684" x2="550" y2="732" class="line"/>
+
+  <rect x="360" y="732" width="380" height="68" class="box"/>
+  <text x="431" y="767" class="text">前端弹出确认提示框</text>
+  <text x="403" y="790" class="small">ElMessageBox.confirm()</text>
+
+  <line x1="550" y1="800" x2="550" y2="848" class="line"/>
+
+  <polygon points="550,848 700,910 550,972 400,910" class="decision"/>
+  <text x="486" y="904" class="text">是否确认执行</text>
+  <text x="518" y="929" class="text">该操作</text>
+
+  <line x1="700" y1="910" x2="900" y2="910" class="line"/>
+  <text x="778" y="898" class="small">否</text>
+  <rect x="900" y="880" width="140" height="60" class="end"/>
+  <text x="932" y="917" class="text">结束</text>
+
+  <line x1="550" y1="972" x2="550" y2="1020" class="line"/>
+  <text x="565" y="996" class="small">是</text>
+
+  <rect x="300" y="1020" width="500" height="68" class="box"/>
+  <text x="356" y="1055" class="text">前端提交状态修改请求至后台</text>
+  <text x="318" y="1078" class="small">setUmsStatus() → POST /admin/ums/members/{id}/status</text>
+
+  <line x1="550" y1="1088" x2="550" y2="1136" class="line"/>
+
+  <rect x="310" y="1136" width="480" height="68" class="box"/>
+  <text x="362" y="1171" class="text">后台接收用户编号和状态值</text>
+  <text x="354" y="1194" class="small">AdminUmsController.st()</text>
+
+  <line x1="550" y1="1204" x2="550" y2="1252" class="line"/>
+
+  <rect x="300" y="1252" width="500" height="68" class="box"/>
+  <text x="347" y="1287" class="text">校验管理员身份并根据 id 查询会员</text>
+  <text x="347" y="1310" class="small">AdminUmsService.setStatus() / UmsMemberMapper.selectById()</text>
+
+  <line x1="550" y1="1320" x2="550" y2="1368" class="line"/>
+
+  <polygon points="550,1368 700,1430 550,1492 400,1430" class="decision"/>
+  <text x="494" y="1424" class="text">会员是否存在</text>
+
+  <line x1="400" y1="1430" x2="200" y2="1430" class="line"/>
+  <text x="278" y="1418" class="small">否</text>
+  <rect x="60" y="1400" width="140" height="60" class="end"/>
+  <text x="86" y="1437" class="text">结束返回</text>
+
+  <line x1="550" y1="1492" x2="550" y2="1540" class="line"/>
+  <text x="565" y="1516" class="small">是</text>
+
+  <rect x="360" y="1540" width="380" height="68" class="box"/>
+  <text x="454" y="1575" class="text">更新会员状态 status</text>
+  <text x="430" y="1598" class="small">umsMemberMapper.updateById()</text>
+
+  <line x1="550" y1="1608" x2="550" y2="1656" class="line"/>
+
+  <rect x="360" y="1656" width="380" height="68" class="box"/>
+  <text x="442" y="1696" class="text">返回成功结果</text>
+
+  <line x1="550" y1="1724" x2="550" y2="1772" class="line"/>
+
+  <rect x="320" y="1772" width="460" height="68" class="end"/>
+  <text x="364" y="1812" class="text">前端提示“已更新”并重新加载会员列表</text>
+</svg>

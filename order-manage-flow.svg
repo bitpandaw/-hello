@@ -1,0 +1,115 @@
+<svg width="1100" height="1880" viewBox="0 0 1100 1880" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#000000"/>
+    </marker>
+    <style>
+      .title { font: bold 28px "Microsoft YaHei", sans-serif; fill: #000000; }
+      .box { fill: #ffffff; stroke: #000000; stroke-width: 2; rx: 10; ry: 10; }
+      .decision { fill: #ffffff; stroke: #000000; stroke-width: 2; }
+      .end { fill: #ffffff; stroke: #000000; stroke-width: 2; rx: 18; ry: 18; }
+      .text { font: 16px "Microsoft YaHei", sans-serif; fill: #000000; }
+      .small { font: 14px "Microsoft YaHei", sans-serif; fill: #000000; }
+      .line { stroke: #000000; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect x="10" y="10" width="1080" height="1860" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="400" y="46" class="title">订单管理流程图</text>
+
+  <rect x="390" y="90" width="320" height="56" class="box"/>
+  <text x="438" y="125" class="text">管理员进入订单管理页面</text>
+
+  <line x1="550" y1="146" x2="550" y2="188" class="line"/>
+
+  <rect x="310" y="188" width="480" height="68" class="box"/>
+  <text x="392" y="223" class="text">系统分页加载订单列表</text>
+  <text x="335" y="246" class="small">pageOms() → GET /admin/oms/orders</text>
+
+  <line x1="550" y1="256" x2="550" y2="300" class="line"/>
+
+  <rect x="300" y="300" width="500" height="68" class="box"/>
+  <text x="340" y="335" class="text">管理员输入订单号或选择订单状态后单击查询</text>
+  <text x="393" y="358" class="small">前端提交 orderNo、status 等条件</text>
+
+  <line x1="550" y1="368" x2="550" y2="412" class="line"/>
+
+  <rect x="300" y="412" width="500" height="68" class="box"/>
+  <text x="348" y="447" class="text">后台校验管理员身份并按条件分页查询</text>
+  <text x="334" y="470" class="small">AdminOmsController.list() → AdminOmsService.page()</text>
+
+  <line x1="550" y1="480" x2="550" y2="524" class="line"/>
+
+  <rect x="345" y="524" width="410" height="56" class="box"/>
+  <text x="405" y="559" class="text">返回并展示筛选后的订单数据</text>
+
+  <line x1="550" y1="580" x2="550" y2="628" class="line"/>
+
+  <polygon points="550,628 700,690 550,752 400,690" class="decision"/>
+  <text x="486" y="684" class="text">订单是否处于</text>
+  <text x="510" y="709" class="text">待发货状态</text>
+
+  <line x1="700" y1="690" x2="900" y2="690" class="line"/>
+  <text x="778" y="678" class="small">否</text>
+  <rect x="900" y="660" width="140" height="60" class="end"/>
+  <text x="932" y="697" class="text">结束</text>
+
+  <line x1="550" y1="752" x2="550" y2="800" class="line"/>
+  <text x="565" y="776" class="small">是</text>
+
+  <rect x="370" y="800" width="360" height="56" class="box"/>
+  <text x="433" y="835" class="text">页面显示“发货”按钮</text>
+
+  <line x1="550" y1="856" x2="550" y2="904" class="line"/>
+
+  <rect x="330" y="904" width="440" height="68" class="box"/>
+  <text x="382" y="939" class="text">管理员单击发货按钮并打开弹窗</text>
+  <text x="410" y="962" class="small">填写物流公司和物流单号</text>
+
+  <line x1="550" y1="972" x2="550" y2="1020" class="line"/>
+
+  <rect x="300" y="1020" width="500" height="68" class="box"/>
+  <text x="358" y="1055" class="text">前端提交发货请求至后台</text>
+  <text x="324" y="1078" class="small">shipOrder() → POST /admin/oms/orders/{id}/ship</text>
+
+  <line x1="550" y1="1088" x2="550" y2="1136" class="line"/>
+
+  <rect x="300" y="1136" width="500" height="68" class="box"/>
+  <text x="349" y="1171" class="text">后台接收订单编号和物流信息</text>
+  <text x="373" y="1194" class="small">AdminOmsController.ship()</text>
+
+  <line x1="550" y1="1204" x2="550" y2="1252" class="line"/>
+
+  <rect x="290" y="1252" width="520" height="68" class="box"/>
+  <text x="339" y="1287" class="text">校验管理员身份并根据订单编号查询订单</text>
+  <text x="338" y="1310" class="small">AdminOmsService.ship() / OmsOrderMapper.selectById()</text>
+
+  <line x1="550" y1="1320" x2="550" y2="1368" class="line"/>
+
+  <polygon points="550,1368 700,1430 550,1492 400,1430" class="decision"/>
+  <text x="492" y="1418" class="text">订单是否存在且</text>
+  <text x="502" y="1442" class="text">状态为待发货</text>
+
+  <line x1="400" y1="1430" x2="200" y2="1430" class="line"/>
+  <text x="278" y="1418" class="small">否</text>
+  <rect x="50" y="1400" width="150" height="60" class="end"/>
+  <text x="78" y="1437" class="text">返回错误</text>
+
+  <line x1="550" y1="1492" x2="550" y2="1540" class="line"/>
+  <text x="565" y="1516" class="small">是</text>
+
+  <rect x="290" y="1540" width="520" height="68" class="box"/>
+  <text x="327" y="1575" class="text">更新订单状态、物流公司、物流单号和发货时间</text>
+  <text x="438" y="1598" class="small">omsOrderMapper.updateById()</text>
+
+  <line x1="550" y1="1608" x2="550" y2="1656" class="line"/>
+
+  <rect x="330" y="1656" width="440" height="68" class="box"/>
+  <text x="405" y="1691" class="text">记录订单操作历史</text>
+  <text x="390" y="1714" class="small">historyMapper.insert()</text>
+
+  <line x1="550" y1="1724" x2="550" y2="1772" class="line"/>
+
+  <rect x="320" y="1772" width="460" height="68" class="end"/>
+  <text x="390" y="1812" class="text">前端提示“已发货”并刷新订单列表</text>
+</svg>

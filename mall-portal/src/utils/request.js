@@ -15,6 +15,14 @@ function flush(token) {
   waitList.length = 0
 }
 
+function redirectToLogin() {
+  const target = window.location.pathname + window.location.search
+  if (!window.__loginRedirect) {
+    window.__loginRedirect = true
+    window.location.href = '/auth/login?redirect=' + encodeURIComponent(target)
+  }
+}
+
 async function tryRefresh() {
   const u = useUserStore()
   if (!u.refreshToken) {
@@ -63,10 +71,7 @@ service.interceptors.response.use(
         }
       }
       u.clear()
-      if (!window.__loginRedirect) {
-        window.__loginRedirect = true
-        window.location.href = '/auth/login?redirect=' + encodeURIComponent(window.location.pathname)
-      }
+      redirectToLogin()
       return Promise.reject(new Error('unauthorized'))
     }
     const msg = (data && data.message) || '请求失败'
@@ -104,7 +109,15 @@ service.interceptors.response.use(
         }
       }
       u.clear()
-      window.location.href = '/auth/login'
+      redirectToLogin()
+    } else if (res && res.status === 403) {
+      const u = useUserStore()
+      if (!u.accessToken) {
+        ElMessage.warning('请先登录后再继续操作')
+        redirectToLogin()
+      } else {
+        ElMessage.error('当前账号暂无此操作权限')
+      }
     } else {
       ElMessage.error(err.message || '网络错误')
     }

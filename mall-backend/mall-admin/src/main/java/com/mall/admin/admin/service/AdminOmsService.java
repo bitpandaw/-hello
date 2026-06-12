@@ -23,10 +23,12 @@ public class AdminOmsService {
     private final OmsOrderMapper omsOrderMapper;
     private final OmsOrderOperateHistoryMapper historyMapper;
 
-    public IPage<OmsOrder> page(int p, int s, Integer status) {
+    public IPage<OmsOrder> page(int p, int s, Integer status, String orderNo) {
         SecurityUser.requireAdmin();
         return omsOrderMapper.selectPage(new Page<>(p, s),
-            new LambdaQueryWrapper<OmsOrder>().eq(status != null, OmsOrder::getStatus, status)
+            new LambdaQueryWrapper<OmsOrder>()
+                .eq(status != null, OmsOrder::getStatus, status)
+                .like(orderNo != null && !orderNo.isBlank(), OmsOrder::getOrderNo, orderNo)
                 .orderByDesc(OmsOrder::getCreateTime));
     }
 

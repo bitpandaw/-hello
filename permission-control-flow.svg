@@ -1,0 +1,117 @@
+<svg width="1200" height="2040" viewBox="0 0 1200 2040" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#000000"/>
+    </marker>
+    <style>
+      .title { font: bold 30px "Microsoft YaHei", sans-serif; fill: #000000; }
+      .box { fill: #ffffff; stroke: #000000; stroke-width: 2; rx: 10; ry: 10; }
+      .decision { fill: #ffffff; stroke: #000000; stroke-width: 2; }
+      .end { fill: #ffffff; stroke: #000000; stroke-width: 2; rx: 18; ry: 18; }
+      .text { font: 16px "Microsoft YaHei", sans-serif; fill: #000000; }
+      .small { font: 14px "Microsoft YaHei", sans-serif; fill: #000000; }
+      .line { stroke: #000000; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect x="10" y="10" width="1180" height="2020" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="420" y="50" class="title">权限控制流程图</text>
+
+  <rect x="390" y="90" width="420" height="56" class="box"/>
+  <text x="458" y="125" class="text">管理员登录后台管理系统</text>
+
+  <line x1="600" y1="146" x2="600" y2="188" class="line"/>
+
+  <rect x="300" y="188" width="600" height="72" class="box"/>
+  <text x="356" y="223" class="text">前端调用 getMenus() 请求当前管理员可见菜单树</text>
+  <text x="390" y="246" class="small">GET /admin/menus → AdminMenuController.menus()</text>
+
+  <line x1="600" y1="260" x2="600" y2="306" class="line"/>
+
+  <polygon points="600,306 760,372 600,438 440,372" class="decision"/>
+  <text x="508" y="366" class="text">当前用户是否</text>
+  <text x="492" y="391" class="text">为管理员身份</text>
+
+  <line x1="760" y1="372" x2="980" y2="372" class="line"/>
+  <text x="850" y="359" class="small">否</text>
+  <rect x="980" y="342" width="150" height="60" class="end"/>
+  <text x="1010" y="379" class="text">返回无权限</text>
+
+  <line x1="600" y1="438" x2="600" y2="484" class="line"/>
+  <text x="614" y="414" class="small">是</text>
+
+  <rect x="250" y="484" width="700" height="78" class="box"/>
+  <text x="330" y="519" class="text">AdminMenuService 查询 ums_admin_role 获取当前管理员角色编号</text>
+  <text x="328" y="542" class="small">SELECT role_id FROM ums_admin_role WHERE admin_id = ?</text>
+
+  <line x1="600" y1="562" x2="600" y2="608" class="line"/>
+
+  <rect x="250" y="608" width="700" height="78" class="box"/>
+  <text x="297" y="643" class="text">根据角色关联表 ums_role_permission 查询菜单类型权限并构建菜单树</text>
+  <text x="316" y="666" class="small">过滤 UmsPermission.type in (0, 1)，递归构建 MenuNode.children</text>
+
+  <line x1="600" y1="686" x2="600" y2="732" class="line"/>
+
+  <rect x="300" y="732" width="600" height="72" class="box"/>
+  <text x="360" y="767" class="text">前端根据返回菜单树动态生成左侧菜单和动态路由</text>
+  <text x="413" y="790" class="small">不同角色看到不同功能模块</text>
+
+  <line x1="600" y1="804" x2="600" y2="850" class="line"/>
+
+  <rect x="320" y="850" width="560" height="72" class="box"/>
+  <text x="397" y="885" class="text">管理员进入权限控制页面 system/index.vue</text>
+  <text x="368" y="908" class="small">onMounted(loadBase) 触发基础数据加载</text>
+
+  <line x1="600" y1="922" x2="600" y2="968" class="line"/>
+
+  <rect x="250" y="968" width="700" height="78" class="box"/>
+  <text x="316" y="1003" class="text">前端并发请求角色列表和权限树基础数据</text>
+  <text x="302" y="1026" class="small">Promise.all([listRoles(), permissionTree()]) → /admin/acl/roles 与 /admin/acl/permissions/tree</text>
+
+  <line x1="600" y1="1046" x2="600" y2="1092" class="line"/>
+
+  <rect x="260" y="1092" width="680" height="78" class="box"/>
+  <text x="319" y="1127" class="text">AdminAclService 分别查询 ums_role 列表与 ums_permission 权限树</text>
+  <text x="297" y="1150" class="small">按 deleted = 0 过滤，并按 parent_id / sort / id 递归构建 PermissionNode</text>
+
+  <line x1="600" y1="1170" x2="600" y2="1216" class="line"/>
+
+  <rect x="300" y="1216" width="600" height="72" class="box"/>
+  <text x="369" y="1251" class="text">前端展示角色表格与带复选框的权限树</text>
+  <text x="390" y="1274" class="small">el-table + el-tree(show-checkbox)</text>
+
+  <line x1="600" y1="1288" x2="600" y2="1334" class="line"/>
+
+  <rect x="280" y="1334" width="640" height="72" class="box"/>
+  <text x="344" y="1369" class="text">管理员选择某一角色，前端请求该角色已授权权限编号</text>
+  <text x="355" y="1392" class="small">GET /admin/acl/roles/{roleId}/permissions</text>
+
+  <line x1="600" y1="1406" x2="600" y2="1452" class="line"/>
+
+  <rect x="300" y="1452" width="600" height="72" class="box"/>
+  <text x="377" y="1487" class="text">后台查询 ums_role_permission 返回 permission_id 列表</text>
+  <text x="428" y="1510" class="small">rolePermissionIds(roleId)</text>
+
+  <line x1="600" y1="1524" x2="600" y2="1570" class="line"/>
+
+  <rect x="290" y="1570" width="620" height="72" class="box"/>
+  <text x="330" y="1605" class="text">前端调用 treeRef.setCheckedKeys(ids) 自动勾选角色已有权限节点</text>
+  <text x="435" y="1628" class="small">支持刷新授权状态</text>
+
+  <line x1="600" y1="1642" x2="600" y2="1688" class="line"/>
+
+  <rect x="250" y="1688" width="700" height="78" class="box"/>
+  <text x="327" y="1723" class="text">管理员调整权限后点击保存，前端提交角色编号与权限编号集合</text>
+  <text x="324" y="1746" class="small">POST /admin/acl/roles/{roleId}/permissions，合并全选和半选节点后去重</text>
+
+  <line x1="600" y1="1766" x2="600" y2="1812" class="line"/>
+
+  <rect x="240" y="1812" width="720" height="78" class="box"/>
+  <text x="298" y="1847" class="text">后台校验管理员身份，删除原角色权限关系，再写入新的 ums_role_permission 关联记录</text>
+  <text x="337" y="1870" class="small">saveRolePermissions()：DELETE 后对 permissionIds 去重，再逐条 INSERT</text>
+
+  <line x1="600" y1="1890" x2="600" y2="1936" class="line"/>
+
+  <rect x="360" y="1936" width="480" height="68" class="end"/>
+  <text x="442" y="1976" class="text">权限控制配置完成</text>
+</svg>

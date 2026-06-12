@@ -4,19 +4,26 @@ import com.mall.admin.security.SecurityUser;
 import com.mall.admin.ums.service.UmsService;
 import com.mall.common.annotation.RateLimit;
 import com.mall.common.api.Result;
+import com.mall.common.json.Sensitive;
 import com.mall.mbg.entity.UmsMember;
 import com.mall.mbg.entity.UmsMemberAddress;
 import com.mall.security.jwt.JwtService;
-
-import java.util.List;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import com.mall.common.json.Sensitive;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Tag(name = "用户")
 @RestController
@@ -36,8 +43,7 @@ public class UmsController {
     @Operation(summary = "注册")
     @RateLimit(key = "reg", max = 10, seconds = 60)
     public Result<?> register(@RequestBody @Valid UmsService.RegisterReq req) {
-        umsService.register(req);
-        return Result.ok();
+        return Result.ok(umsService.register(req));
     }
 
     @PostMapping("/login")
@@ -88,14 +94,14 @@ public class UmsController {
     }
 
     @PostMapping("/address")
-    @Operation(summary = "新增/修地址")
+    @Operation(summary = "新增/修改地址")
     public Result<?> addr(@RequestBody UmsMemberAddress a) {
         umsService.addressSave(SecurityUser.requireMember(), a);
         return Result.ok();
     }
 
     @DeleteMapping("/address/{id}")
-    @Operation(summary = "删地址")
+    @Operation(summary = "删除地址")
     public Result<?> addrDel(@PathVariable long id) {
         umsService.addressDelete(SecurityUser.requireMember(), id);
         return Result.ok();

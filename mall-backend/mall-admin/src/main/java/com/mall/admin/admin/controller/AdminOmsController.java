@@ -20,8 +20,12 @@ public class AdminOmsController {
 
     @GetMapping
     @Operation(summary = "订单分页")
-    public Result<IPage<OmsOrder>> list(@RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "10") int s, @RequestParam(required = false) Integer status) {
-        return Result.ok(adminOmsService.page(p, s, status));
+    public Result<IPage<OmsOrder>> list(
+        @RequestParam(defaultValue = "1") int p,
+        @RequestParam(defaultValue = "10") int s,
+        @RequestParam(required = false) Integer status,
+        @RequestParam(required = false) String orderNo) {
+        return Result.ok(adminOmsService.page(p, s, status, orderNo));
     }
 
     @PostMapping("/{id}/ship")

@@ -7,8 +7,6 @@ const comp = (key) => {
     'order/list': () => import('@/views/oms/order.vue'),
     'member/list': () => import('@/views/ums/member.vue'),
     'system/role': () => import('@/views/system/index.vue'),
-    'recommend/manage': () => import('@/views/recommend/manage.vue'),
-    'recommend/report': () => import('@/views/recommend/report.vue'),
   }
   const f = m[k] || m[k.replace(/^\s+|\s+$/g, '')]
   return f
